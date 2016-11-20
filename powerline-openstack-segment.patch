@@ -1,0 +1,62 @@
+From f1b09d0b3ce6c453f4dfb1443ca58f4995cf8568 Mon Sep 17 00:00:00 2001
+From: lynxnot <dfanciola@gmail.com>
+Date: Fri, 28 Oct 2016 15:49:12 +0200
+Subject: [PATCH] Added Openstack Segment
+
+---
+ powerline/config_files/themes/powerline.json              | 3 +++
+ powerline/config_files/themes/shell/default_leftonly.json | 4 ++++
+ powerline/segments/common/env.py                          | 8 ++++++++
+ 3 files changed, 15 insertions(+)
+
+diff --git a/powerline/config_files/themes/powerline.json b/powerline/config_files/themes/powerline.json
+index db8246b..d717a65 100644
+--- a/powerline/config_files/themes/powerline.json
++++ b/powerline/config_files/themes/powerline.json
+@@ -67,6 +67,9 @@
+ 		"powerline.segments.common.env.virtualenv": {
+ 			"before": "ⓔ  "
+ 		},
++		"powerline.segments.common.env.openstack": {
++			"before": "ᨒ  "
++		},
+ 		"powerline.segments.common.wthr.weather": {
+ 			"args": {
+ 				"icons": {
+diff --git a/powerline/config_files/themes/shell/default_leftonly.json b/powerline/config_files/themes/shell/default_leftonly.json
+index 61e59f8..9e0ccbd 100644
+--- a/powerline/config_files/themes/shell/default_leftonly.json
++++ b/powerline/config_files/themes/shell/default_leftonly.json
+@@ -14,6 +14,10 @@
+ 				"priority": 50
+ 			},
+ 			{
++				"function": "powerline.segments.common.env.openstack",
++				"priority": 40
++			},
++			{
+ 				"function": "powerline.segments.common.vcs.branch",
+ 				"priority": 40
+ 			},
+diff --git a/powerline/segments/common/env.py b/powerline/segments/common/env.py
+index ec28be7..9b31992 100644
+--- a/powerline/segments/common/env.py
++++ b/powerline/segments/common/env.py
+@@ -36,6 +36,14 @@ def virtualenv(pl, segment_info, ignore_venv=False, ignore_conda=False):
+ 
+ 
+ @requires_segment_info
++def openstack(pl, segment_info):
++	'''Return the name of the current openstack selected cloud.
++
++	'''
++	return segment_info['environ'].get('OS_CLOUD', None)
++
++
++@requires_segment_info
+ class CwdSegment(Segment):
+ 	def argspecobjs(self):
+ 		for obj in super(CwdSegment, self).argspecobjs():
+-- 
+2.9.3
+
