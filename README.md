@@ -2,8 +2,9 @@
 
 Adds an openstack segment to powerline, based on OS_CLOUD
 
-## Usage 
+## Usage
 
-''' $ cd `powerline_install_dir`
-    $ patch -p1 < `path_to_powerline-openstack-segment.patch`
-'''
+  ```
+    $ cd {powerline_install_dir}
+    $ patch -p1 < {path_to_powerline-openstack-segment.patch}
+  ```
